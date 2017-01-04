@@ -1,0 +1,23 @@
+// ngSkinTools shelf
+// www.ngskintools.com
+
+global proc ngSkinTools_shelf () {
+	global string $gShelfTopLevel ;
+	if (      !`shelfButton -query -exists "ngSkinTools"`
+		&& !`optionVar -exists "ngSkinToolsToolbar"`
+	) {
+		shelfButton
+			-parent "Custom"
+
+			-enable 1 -visible 1 -preventOverride 0
+			-label "" -annotation "ngSkinTools UI" 
+			-image "skin.png" -style "iconOnly" -noBackground 1
+			-align "center" -marginWidth 1 -marginHeight 1
+	        -command "from ngSkinTools.ui.mainwindow import MainWindow\nMainWindow.open()" 
+	        -sourceType "python" 
+	        -commandRepeatable 0
+			"ngSkinTools";
+		optionVar -stringValue "ngSkinToolsToolbar" "ngSkinTools_v1" ;
+		shelfTabLayout -edit -selectTab "Custom" $gShelfTopLevel ;
+	}
+} 
